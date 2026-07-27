@@ -24,8 +24,6 @@ This project applies **LDA topic modelling** to a dataset of **33,396 McDonald's
 4. **Interpretation** — cross-checked each topic against average star rating (information the model never saw during training) to confirm which themes are complaints and which are positive experiences.
 5. **Recommendations** — translated the findings into concrete, actionable steps for McDonald's management.
 
-Full code, explanations, and reasoning are in [`McDonald_LDA_Analysis.ipynb`](./McDonald_LDA_Analysis.ipynb).
-
 ---
 
 ## Key Visualisations
@@ -33,44 +31,33 @@ Full code, explanations, and reasoning are in [`McDonald_LDA_Analysis.ipynb`](./
 ### Rating distribution
 
 Ratings are bimodal — customers tend to leave a review only when they are very satisfied or very dissatisfied, with fewer 2-4 star reviews in between.
-
-![Rating Distribution](images/rating_distribution.png)
+<img width="900" height="500" alt="avg_rating_by_topic" src="https://github.com/user-attachments/assets/673e18d6-8128-461c-aca1-34cf27b70d78" />
+<img width="700" height="450" alt="rating_distribution" src="https://github.com/user-attachments/assets/ba6f26ee-07a8-4982-9e19-ead6c4ec9ff4" />
 
 ### Review volume by store
 
 Review volume is concentrated in a handful of high-traffic locations, mostly near tourist areas.
 
-![Top Stores by Review Count](images/top_stores.png)
+<img width="800" height="500" alt="top_stores" src="https://github.com/user-attachments/assets/6dbea8a6-a796-4825-8310-3706e9ed083a" />
 
 ### Choosing the number of topics
 
 Coherence score alone favoured an uninformatively small number of topics (2-4). The final choice of **k=7** balanced coherence with topic interpretability, confirmed by manually reading topic content at each candidate value.
 
-![Coherence Scores](images/coherence_scores.png)
-
-### Top words per topic
-
-Each of the 7 topics is defined by a distinct set of top-weighted words, used to name and interpret the theme.
-
-![Top Words per Topic](images/topic_top_words.png)
+<img width="700" height="450" alt="review_length_distribution" src="https://github.com/user-attachments/assets/fc2efe0c-86be-4ee7-ac86-4976ae996023" />
 
 ### Word cloud of most frequent terms
 
 A quick visual sense of the most common words across all cleaned reviews.
 
-![Word Cloud](images/wordcloud_all_reviews.png)
-
-### Average rating by topic
-
-Cross-checking each topic against its average star rating validates the complaint/positive split, since the model never saw ratings during training.
-
-![Average Rating by Topic](images/avg_rating_by_topic.png)
+<img width="2400" height="1050" alt="wordcloud_positive_vs_negative" src="https://github.com/user-attachments/assets/cebfcb07-7591-4dad-a3b3-835ccdce1aec" />
+<img width="1800" height="1050" alt="wordcloud_all_reviews" src="https://github.com/user-attachments/assets/4f57ae0a-4f05-4668-ac1f-173adb49ca04" />
 
 ### Reviews per topic
 
 Order Delays & Follow-Up and Fast/Clean/Friendly Service are by far the largest topics, together covering the majority of all reviews.
 
-![Reviews per Topic](images/reviews_per_topic.png)
+<img width="1200" height="1400" alt="topic_top_words" src="https://github.com/user-attachments/assets/cf4dac64-4746-46f0-8ea0-aba89e25eab1" />
 
 ---
 
@@ -100,27 +87,4 @@ Order Delays & Follow-Up and Fast/Clean/Friendly Service are by far the largest 
 
 ---
 
-## Repository Structure
-
-```
-├── McDonald_LDA_Analysis.ipynb      # Full notebook: EDA, preprocessing, LDA modelling, interpretation
-├── McDonald_Reviews_LDA_Report.docx # 2-page summary report (methodology, findings, recommendations)
-├── lda_visualisation.html           # Interactive pyLDAvis topic visualisation
-├── images/                          # All charts used in this README and the report
-└── README.md
-```
-
-## How to Run
-
-```bash
-pip install pandas numpy matplotlib seaborn nltk gensim pyLDAvis wordcloud
-jupyter notebook McDonald_LDA_Analysis.ipynb
-```
-
 The notebook downloads the required NLTK corpora (`stopwords`, `wordnet`, `punkt`, `averaged_perceptron_tagger`) automatically on first run.
-
-## Deliverables
-
-- **Notebook:** [`McDonald_LDA_Analysis.ipynb`](./McDonald_LDA_Analysis.ipynb)
-- **Report:** [`McDonald_Reviews_LDA_Report.docx`](./McDonald_Reviews_LDA_Report.docx)
-- **Interactive topic visualisation:** [`lda_visualisation.html`](./lda_visualisation.html)
