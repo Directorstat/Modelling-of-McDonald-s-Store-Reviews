@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import re
@@ -14,18 +15,20 @@ import joblib # New import for joblib
 
 # Ensure NLTK resources are downloaded
 # These checks prevent re-downloading if already available
+# Ensure required NLTK resources are available
 try:
-    nltk.data.find('corpora/stopwords')
-except nltk.downloader.DownloadError:
-    nltk.download('stopwords')
+    nltk.data.find("corpora/stopwords")
+except LookupError:
+    nltk.download("stopwords", quiet=True)
+
 try:
-    nltk.data.find('tokenizers/punkt')
-except nltk.downloader.DownloadError:
-    nltk.download('punkt')
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt", quiet=True)
 try:
-    nltk.data.find('corpora/wordnet')
-except nltk.downloader.DownloadError:
-    nltk.download('wordnet')
+    nltk.data.find("corpora/wordnet")
+except LookupError:
+    nltk.download("wordnet", quiet=True)
 try:
     nltk.data.find('taggers/averaged_perceptron_tagger')
 except nltk.downloader.DownloadError:
@@ -34,6 +37,7 @@ try:
     nltk.data.find('sentiment/vader_lexicon')
 except nltk.downloader.DownloadError:
     nltk.download('vader_lexicon')
+stop_words = set(stopwords.words("english"))
 
 # Initialize VADER sentiment analyzer
 analyzer = SentimentIntensityAnalyzer()
